@@ -10,7 +10,7 @@ public class ReadWritePegawai {
     public static List<Pegawai> getPegawais(){
         List<Pegawai> result = new LinkedList<Pegawai>();
         try{
-            BufferedReader reader = new BufferedReader(new FileReader("data_pegawai.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("stored/data_pegawai.txt"));
             while(reader.readLine() != null){
                 try{
                     Pegawai temp = new Pegawai();
@@ -34,7 +34,7 @@ public class ReadWritePegawai {
 
     public static void StoreAbsensi(String id, String nama, String waktu, String status){
         try{
-            BufferedWriter out = new BufferedWriter(new FileWriter("riwayat.txt", true));
+            BufferedWriter out = new BufferedWriter(new FileWriter("stored/riwayat.txt", true));
             out.newLine();
             out.write("#"); //Ini digunakan sebagai pembatas, agar file lebih mudah dibaca
 
