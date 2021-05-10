@@ -9,7 +9,8 @@ import java.util.List;
 
 public class ReadWritePegawai {
     //Penggunaan List ditujukan agar dapat mengatasi perubahan size
-    public static List<Pegawai> getPegawais(){
+    //Di sini kami menerapkan Static Polymorphism yaitu Overloading method
+    public static List<Pegawai> ReadFile(){
         List<Pegawai> result = new LinkedList<Pegawai>();
         try{
             BufferedReader reader = new BufferedReader(new FileReader("stored/data_pegawai.txt"));
@@ -33,8 +34,33 @@ public class ReadWritePegawai {
         }
         return result;
     }
+    
+    public static List<String> ReadFile(LocalDate today){
+        List<String> result = new LinkedList<String>();
+        try{
+            BufferedReader reader = new BufferedReader(new FileReader("stored/riwayat.txt"));
+            String text;
+            while((text = reader.readLine()) != null){
+                if(text.equals("Nama") ){
+                    String nama = reader.readLine();
+                    reader.readLine();
+                    reader.readLine();
+                    if(LocalDate.parse(reader.readLine()).equals(today)){
+                        result.add(nama);
+                    }
+                }else if(text.equals("")){
+                    break;
+                }
+            }
+            reader.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return result;
+    }
 
-    public static void StoreAbsensi(String id, String nama,String tanggal, String waktu, String status){
+    // PROSES PENULISAN RIWAYAT
+    public static void WriteFile(String id, String nama,String tanggal, String waktu, String status){
         try{
             BufferedWriter out = new BufferedWriter(new FileWriter("stored/riwayat.txt", true));
             out.write("#"); //Ini digunakan sebagai pembatas, agar file lebih mudah dibaca
@@ -67,27 +93,4 @@ public class ReadWritePegawai {
         }
     }
 
-    public static List<String> ReadRiwayat(){
-        List<String> result = new LinkedList<String>();
-        try{
-            BufferedReader reader = new BufferedReader(new FileReader("stored/riwayat.txt"));
-            String text;
-            while((text = reader.readLine()) != null){
-                if(text.equals("Nama") ){
-                    String nama = reader.readLine();
-                    reader.readLine();
-                    reader.readLine();
-                    if(LocalDate.parse(reader.readLine()).equals(LocalDate.now())){
-                        result.add(nama);
-                    }
-                }else if(text.equals("")){
-                    break;
-                }
-            }
-            reader.close();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        return result;
-    }
 }

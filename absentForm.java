@@ -1,10 +1,11 @@
 import java.awt.event.*;
+import java.time.LocalDate;
 import java.util.List;
 import java.awt.BorderLayout;
-
 import javax.swing.*;
 
 public class absentForm implements ActionListener {
+    // ========== Awal Pendefinisian Variabel ==============
     private JLabel judul;
     private JLabel userName;
     private JLabel passWord;
@@ -15,6 +16,7 @@ public class absentForm implements ActionListener {
     private JList listKehadiran;
     private JTextArea tArea;
     private static SistemAbsensi sistem;
+    // ========== Akhir Pendefinisian Variabel ==============
     
     public absentForm(){
         JFrame frame = new JFrame();
@@ -59,8 +61,9 @@ public class absentForm implements ActionListener {
         btnList.addActionListener(this);
     }
     
+    // === Pengisisan List Kehadiran ===
     public void fillList(){
-        List<String> list = ReadWritePegawai.ReadRiwayat();
+        List<String> list = ReadWritePegawai.ReadFile(LocalDate.now());
         DefaultListModel listModel = new DefaultListModel<String>();
         for (String i : list) {
             listModel.addElement(i);
@@ -68,6 +71,7 @@ public class absentForm implements ActionListener {
         listKehadiran =  new JList(listModel);
     }
     
+    // === Menampilkan List Kehadiran ===
     public void showList(){
         JFrame newframe = new JFrame("Telah Melakukan Absensi");
         JScrollPane scrollPane = new JScrollPane();
@@ -83,10 +87,12 @@ public class absentForm implements ActionListener {
     
     public void actionPerformed(ActionEvent e){
         if(e.getSource()==btnSubmit){
+            // --- Mengambil input dari JTextField ---
             String nama = hasilUser.getText();
             String pass = hasilPass.getText();
             fillList();
 
+            // --- Cek apakah hari ini sudah absen ---
             for(int i=0; i<listKehadiran.getModel().getSize(); ++i){
                 if(nama.equals(listKehadiran.getModel().getElementAt(i))){
                     JOptionPane.showMessageDialog(null, "Anda sudah pernah absen", "INFORMASI",
@@ -95,6 +101,7 @@ public class absentForm implements ActionListener {
                 }
             }
 
+            // --- Cek Kecocokan Nama dan Password ---
             if(sistem.Check(nama, pass)){
                 JOptionPane.showMessageDialog(null, "Mahasiswa "+nama+" berhasil absen", "INFORMASI",
                 JOptionPane.INFORMATION_MESSAGE);
