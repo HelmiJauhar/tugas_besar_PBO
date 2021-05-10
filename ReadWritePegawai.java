@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.lang.ProcessBuilder.Redirect;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
@@ -41,11 +42,15 @@ public class ReadWritePegawai {
             BufferedReader reader = new BufferedReader(new FileReader("stored/riwayat.txt"));
             String text;
             while((text = reader.readLine()) != null){
-                if(text.equals("Nama") ){
-                    String nama = reader.readLine();
-                    reader.readLine();
-                    reader.readLine();
-                    if(LocalDate.parse(reader.readLine()).equals(today)){
+                int index = text.indexOf(" ");
+                if(index>0 && text.substring(0, index).equals("Nama")){
+                    int indexNama = text.lastIndexOf(":");
+                    String nama = text.substring(indexNama+2);
+                    
+                    text = reader.readLine();
+                    int indexTanggal = text.lastIndexOf(":");
+                    String tanggal = text.substring(indexTanggal+2);
+                    if(LocalDate.parse(tanggal).equals(today)){
                         result.add(nama);
                     }
                 }else if(text.equals("")){
