@@ -66,26 +66,15 @@ public class ReadWritePegawai {
             out.write("#"); //Ini digunakan sebagai pembatas, agar file lebih mudah dibaca
             
             out.newLine();
-            out.write("ID");
+            out.write("ID \t: "+id);            
             out.newLine();
-            out.write(id);
-            
+            out.write("Nama \t: "+nama);                       
             out.newLine();
-            out.write("Nama");
+            out.write("Tanggal : "+tanggal);			
             out.newLine();
-            out.write(nama);
-            
-            out.newLine();
-            out.write("Waktu");
-            out.newLine();
-            out.write(waktu);
-            
-            out.newLine();
-            out.write(tanggal);
-            
+            out.write("Waktu \t: "+waktu);			
             out.newLine();
             out.write("Status \t: "+status);
-            out.newLine();
 
             out.close();
         }catch(Exception e){
