@@ -2,8 +2,10 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
+
 
 public class ReadWritePegawai {
     //Penggunaan List ditujukan agar dapat mengatasi perubahan size
@@ -32,27 +34,60 @@ public class ReadWritePegawai {
         return result;
     }
 
-    public static void StoreAbsensi(String id, String nama, String waktu, String status){
+    public static void StoreAbsensi(String id, String nama,String tanggal, String waktu, String status){
         try{
             BufferedWriter out = new BufferedWriter(new FileWriter("stored/riwayat.txt", true));
-            out.newLine();
             out.write("#"); //Ini digunakan sebagai pembatas, agar file lebih mudah dibaca
-
+            
             out.newLine();
-            out.write("ID \t: "+id);
-
+            out.write("ID");
             out.newLine();
-            out.write("Nama \t: "+nama);
-
+            out.write(id);
+            
             out.newLine();
-            out.write("Waktu \t: "+waktu);
-
+            out.write("Nama");
             out.newLine();
-            out.write("Status \t:"+status);
+            out.write(nama);
+            
+            out.newLine();
+            out.write("Waktu");
+            out.newLine();
+            out.write(waktu);
+            
+            out.newLine();
+            out.write(tanggal);
+            
+            out.newLine();
+            out.write("Status \t: "+status);
+            out.newLine();
 
             out.close();
         }catch(Exception e){
             e.printStackTrace();
         }
+    }
+
+    public static List<String> ReadRiwayat(){
+        List<String> result = new LinkedList<String>();
+        try{
+            BufferedReader reader = new BufferedReader(new FileReader("stored/riwayat.txt"));
+            String text;
+            while((text = reader.readLine()) != null){
+                if(text.equals("Nama") ){
+                    String nama = reader.readLine();
+                    reader.readLine();
+                    reader.readLine();
+                    if(LocalDate.parse(reader.readLine()).equals(LocalDate.now())){
+                        result.add(nama);
+                    }
+                }else if(text.equals("")){
+                    break;
+                }
+            }
+            reader.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return result;
     }
 }
