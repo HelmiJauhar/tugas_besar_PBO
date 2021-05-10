@@ -2,13 +2,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class SistemAbsensi {
-    List<AbsensiPegawai> listAbsensiPegawai = new LinkedList<AbsensiPegawai>();
+    private List<AbsensiPegawai> listAbsensiPegawai = new LinkedList<AbsensiPegawai>();
 
     public SistemAbsensi() {
-        // ========== Pendefinisian Variabel =================
-
-        // Menggunakan List<> agar ukurannya dapat berubah-ubah
-        List<Pegawai> listPegawai = ReadWritePegawai.getPegawais(); 
+        // Mengambil data dari file pegawai.txt
+        List<Pegawai> listPegawai = ReadWritePegawai.ReadFile(); 
         
         // Perulangan untuk mengisi absensiPegawai menggunakan objeck Pegawai
         for (Pegawai pegawai : listPegawai) {
@@ -16,8 +14,9 @@ public class SistemAbsensi {
         }
     }
     
+    // --- Melakukan perulangan ke seluruh elemen absensiPegawai ---
+    // --- Hingga ditemukan kecocokan --- 
     public boolean Check(String nama, String pass){
-        // Perulangan untuk check kecocokan nama dan password
         for (AbsensiPegawai absensiPegawai : listAbsensiPegawai) {
             if(absensiPegawai.Compare(nama, pass)){
                 return true;
