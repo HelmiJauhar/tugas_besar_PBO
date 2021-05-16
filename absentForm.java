@@ -21,7 +21,7 @@ public class absentForm implements ActionListener {
     public absentForm(){
         JFrame frame = new JFrame();
         frame.setBounds(200, 200, 400, 250);
-        frame.setTitle("AAP (Aplikasi Absensi Pegawai");
+        frame.setTitle("AAP (Aplikasi Absensi Pegawai)");
         
         judul = new JLabel("Absensi Pegawai");
         judul.setBounds(25, 15, 150, 25);
@@ -103,7 +103,7 @@ public class absentForm implements ActionListener {
 
             // --- Cek Kecocokan Nama dan Password ---
             if(sistem.Check(nama, pass)){
-                JOptionPane.showMessageDialog(null, "Mahasiswa "+nama+" berhasil absen", "INFORMASI",
+                JOptionPane.showMessageDialog(null, "Pegawai "+nama+" berhasil absen", "INFORMASI",
                 JOptionPane.INFORMATION_MESSAGE);
             }else{
                 JOptionPane.showMessageDialog(null, "Username dan/atau Password Salah !!!", "INFORMASI",
