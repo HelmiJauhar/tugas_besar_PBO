@@ -21,9 +21,9 @@ public class absentForm implements ActionListener {
     public absentForm(){
         JFrame frame = new JFrame();
         frame.setBounds(200, 200, 400, 250);
-        frame.setTitle("Sistem Absensi Mahasiswa");
+        frame.setTitle("AAP (Aplikasi Absensi Pegawai");
         
-        judul = new JLabel("Absensi Mahasiswa");
+        judul = new JLabel("Absensi Pegawai");
         judul.setBounds(25, 15, 150, 25);
         frame.add(judul);
         
