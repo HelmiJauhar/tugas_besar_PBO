@@ -17,7 +17,7 @@ public class absentForm implements ActionListener {
     private JTextArea tArea;
     private static SistemAbsensi sistem;
     // ========== Akhir Pendefinisian Variabel ==============
-    
+
     public absentForm(){
         JFrame frame = new JFrame();
         frame.setBounds(200, 200, 400, 250);
@@ -60,7 +60,7 @@ public class absentForm implements ActionListener {
         btnSubmit.addActionListener(this);
         btnList.addActionListener(this);
     }
-    
+
     // === Pengisisan List Kehadiran ===
     public void fillList(){
         List<String> list = ReadWritePegawai.ReadFile(LocalDate.now());
@@ -70,7 +70,7 @@ public class absentForm implements ActionListener {
         }
         listKehadiran =  new JList(listModel);
     }
-    
+
     // === Menampilkan List Kehadiran ===
     public void showList(){
         JFrame newframe = new JFrame("Telah Melakukan Absensi");
@@ -84,7 +84,7 @@ public class absentForm implements ActionListener {
         newframe.setBounds(300, 300,500, 250);
         newframe.setVisible(true);
     }
-    
+
     public void actionPerformed(ActionEvent e){
         if(e.getSource()==btnSubmit){
             // --- Mengambil input dari JTextField ---

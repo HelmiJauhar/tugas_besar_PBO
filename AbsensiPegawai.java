@@ -21,7 +21,7 @@ public class AbsensiPegawai extends Pegawai{
         }
         return false;
     }
-    
+
     // --- Proses untuk men-submit presensi pada hari ini dengan waktu sekarang ---
     private void Submit(LocalTime waktu){
         this.waktu = waktu.toString();//Mengknversi localTime menjadi string
@@ -30,5 +30,4 @@ public class AbsensiPegawai extends Pegawai{
 
         ReadWritePegawai.WriteFile(id, nama, this.tanggal, this.waktu, status);
     }
-
 }
